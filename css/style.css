@@ -1,0 +1,636 @@
+/* ===========================================================
+   OLMAYA WINERY — stylesheet
+   Fonts: Cinzel (display / logo), Cormorant Garamond (body)
+   =========================================================== */
+
+:root {
+  --bg: #15130f;
+  --bg-alt: #1c1914;
+  --panel: #211d17;
+  --cream: #f1ead7;
+  --cream-soft: #e6dcc2;
+  --ink: #2a241c;
+  --ink-soft: #4a4030;
+  --gold: #c7a256;
+  --gold-light: #ecd9a0;
+  --gold-dark: #8a6a30;
+  --mist: #7c8aa0;
+  --mist-soft: #aab4c2;
+  --line: rgba(199, 162, 86, 0.25);
+  --radius: 2px;
+  --maxw: 1180px;
+  --shadow: 0 20px 60px rgba(0,0,0,0.45);
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--cream-soft);
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 19px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; display: block; }
+
+a { color: inherit; text-decoration: none; }
+
+.container {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 28px;
+}
+
+h1, h2, h3, h4 {
+  font-family: "Cinzel", Georgia, serif;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--cream);
+  margin: 0 0 0.6em;
+}
+
+.eyebrow {
+  display: inline-block;
+  font-family: "Cinzel", serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 14px;
+}
+
+.section-head {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 56px;
+}
+
+.section-head h2 {
+  font-size: clamp(1.7rem, 2.6vw, 2.4rem);
+}
+
+.section-head p {
+  font-size: 1.15rem;
+  color: var(--mist-soft);
+  margin: 0;
+}
+
+section { padding: 96px 0; }
+
+.section-alt { background: var(--bg-alt); }
+
+.rule {
+  width: 64px;
+  height: 1px;
+  background: var(--gold);
+  margin: 18px auto 0;
+  opacity: 0.7;
+}
+
+/* ---------- gold foil text ---------- */
+.foil {
+  background: linear-gradient(115deg, var(--gold-dark) 10%, var(--gold-light) 35%, var(--gold) 55%, var(--gold-light) 70%, var(--gold-dark) 92%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ---------- buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-family: "Cinzel", serif;
+  font-size: 0.82rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 16px 34px;
+  border: 1px solid var(--gold);
+  border-radius: var(--radius);
+  cursor: pointer;
+  background: transparent;
+  color: var(--gold-light);
+  transition: background 0.25s ease, color 0.25s ease, transform 0.15s ease;
+}
+.btn:hover { background: var(--gold); color: #1a1712; transform: translateY(-1px); }
+.btn:active { transform: translateY(0); }
+.btn-solid {
+  background: var(--gold);
+  color: #1a1712;
+}
+.btn-solid:hover { background: var(--gold-light); color: #1a1712; }
+.btn:disabled { opacity: 0.55; cursor: not-allowed; transform: none; }
+
+/* ===========================================================
+   HEADER / NAV
+   =========================================================== */
+#site-header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(21, 19, 15, 0.72);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s ease, background 0.3s ease;
+}
+#site-header.scrolled {
+  border-bottom-color: var(--line);
+  background: rgba(21, 19, 15, 0.92);
+}
+.nav-inner {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 16px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.logo-word {
+  font-family: "Cinzel", serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+}
+nav.main-nav {
+  display: flex;
+  gap: 34px;
+}
+nav.main-nav a {
+  font-family: "Cinzel", serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cream-soft);
+  padding: 6px 0;
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+nav.main-nav a:hover { color: var(--gold-light); border-color: var(--gold); }
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+}
+.nav-toggle span {
+  width: 24px; height: 1px; background: var(--gold-light);
+}
+
+/* ===========================================================
+   HERO
+   =========================================================== */
+#hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 150px 0 90px;
+  background:
+    radial-gradient(ellipse at 20% 20%, rgba(124,138,160,0.10), transparent 55%),
+    radial-gradient(ellipse at 80% 80%, rgba(199,162,86,0.08), transparent 55%),
+    var(--bg);
+  overflow: hidden;
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 40px;
+  align-items: center;
+}
+.hero-word {
+  font-family: "Cinzel", serif;
+  font-size: clamp(2.6rem, 7vw, 5.2rem);
+  letter-spacing: 0.12em;
+  line-height: 1.05;
+  margin-bottom: 22px;
+}
+.hero-tagline {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-size: clamp(1.2rem, 2vw, 1.55rem);
+  color: var(--mist-soft);
+  max-width: 480px;
+  margin-bottom: 34px;
+}
+.hero-ctas { display: flex; gap: 18px; flex-wrap: wrap; }
+
+.hero-bottle-wrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+.hero-bottle-wrap::before {
+  content: "";
+  position: absolute;
+  inset: -6% -6%;
+  background: radial-gradient(ellipse at center, rgba(199,162,86,0.16), transparent 70%);
+  filter: blur(6px);
+}
+.hero-bottle-wrap img {
+  position: relative;
+  max-height: 74vh;
+  width: auto;
+  margin: 0 auto;
+  border-radius: 6px;
+  box-shadow: var(--shadow);
+}
+.scroll-cue {
+  position: absolute;
+  bottom: 28px; left: 50%;
+  transform: translateX(-50%);
+  font-family: "Cinzel", serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--mist-soft);
+  opacity: 0.8;
+}
+
+/* ===========================================================
+   ABOUT / STORY
+   =========================================================== */
+.story-grid {
+  display: grid;
+  grid-template-columns: 0.95fr 1.05fr;
+  gap: 64px;
+  align-items: center;
+}
+.story-img {
+  border-radius: 4px;
+  box-shadow: var(--shadow);
+}
+.story-copy p { margin: 0 0 20px; font-size: 1.15rem; color: var(--cream-soft); }
+.story-copy p:last-child { margin-bottom: 0; }
+.story-copy .lede {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-size: 1.4rem;
+  color: var(--cream);
+}
+
+.pillars {
+  margin-top: 64px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px;
+}
+.pillar {
+  text-align: center;
+  padding: 30px 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--panel);
+}
+.pillar .mark {
+  font-family: "Cinzel", serif;
+  color: var(--gold);
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  margin-bottom: 12px;
+  display: block;
+}
+.pillar h4 { font-size: 1.05rem; margin-bottom: 10px; }
+.pillar p { margin: 0; font-size: 1rem; color: var(--mist-soft); }
+
+/* ===========================================================
+   GALLERY
+   =========================================================== */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-auto-rows: 180px;
+  gap: 10px;
+}
+.gallery-grid figure {
+  margin: 0;
+  overflow: hidden;
+  border-radius: 3px;
+  cursor: zoom-in;
+  position: relative;
+}
+.gallery-grid img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease, filter 0.5s ease;
+  filter: saturate(0.94) brightness(0.96);
+}
+.gallery-grid figure:hover img { transform: scale(1.06); filter: saturate(1) brightness(1); }
+.gallery-grid figure.big { grid-column: span 3; grid-row: span 2; }
+.gallery-grid figure.wide { grid-column: span 3; }
+.gallery-grid figure.tall { grid-row: span 2; }
+.gallery-grid figcaption {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  padding: 10px 14px;
+  font-family: "Cinzel", serif;
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cream);
+  background: linear-gradient(to top, rgba(0,0,0,0.65), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.gallery-grid figure:hover figcaption { opacity: 1; }
+
+/* lightbox */
+#lightbox {
+  position: fixed; inset: 0; z-index: 200;
+  background: rgba(10,9,7,0.94);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+#lightbox.open { display: flex; }
+#lightbox img {
+  max-width: 100%; max-height: 82vh;
+  border-radius: 4px;
+  box-shadow: var(--shadow);
+}
+#lightbox .lb-cap {
+  position: absolute;
+  bottom: 30px; left: 0; right: 0;
+  text-align: center;
+  font-family: "Cinzel", serif;
+  letter-spacing: 0.12em;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: var(--gold-light);
+}
+#lightbox .lb-close, #lightbox .lb-prev, #lightbox .lb-next {
+  position: absolute;
+  background: none;
+  border: 1px solid var(--line);
+  color: var(--cream);
+  cursor: pointer;
+  font-size: 1.3rem;
+  width: 46px; height: 46px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
+#lightbox .lb-close { top: 24px; right: 24px; }
+#lightbox .lb-prev { left: 24px; top: 50%; transform: translateY(-50%); }
+#lightbox .lb-next { right: 24px; top: 50%; transform: translateY(-50%); }
+#lightbox .lb-close:hover, #lightbox .lb-prev:hover, #lightbox .lb-next:hover { border-color: var(--gold); color: var(--gold-light); }
+
+/* ===========================================================
+   WINES / PRODUCTS
+   =========================================================== */
+.wines-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+}
+.wine-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.wine-card .wine-img {
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: #0f0e0c;
+}
+.wine-card .wine-img img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; }
+.wine-card .wine-body { padding: 30px 30px 32px; flex: 1; display: flex; flex-direction: column; }
+.wine-card h3 { font-size: 1.4rem; margin-bottom: 4px; }
+.wine-sub {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  color: var(--mist-soft);
+  margin-bottom: 16px;
+  font-size: 1.05rem;
+}
+.wine-tag {
+  display: inline-block;
+  align-self: flex-start;
+  font-family: "Cinzel", serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid var(--gold-dark);
+  padding: 5px 10px;
+  border-radius: 20px;
+  margin-bottom: 16px;
+}
+.wine-notes { margin: 0 0 22px; color: var(--cream-soft); font-size: 1.05rem; }
+.wine-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--line);
+  padding-top: 18px;
+  margin-top: auto;
+}
+.wine-price {
+  font-family: "Cinzel", serif;
+  font-size: 1.35rem;
+  color: var(--gold-light);
+}
+.wine-price small { font-family: "Cormorant Garamond", serif; font-size: 0.85rem; color: var(--mist-soft); }
+
+/* ===========================================================
+   ORDER / CONTACT
+   =========================================================== */
+.order-note {
+  text-align: center;
+  max-width: 660px;
+  margin: -20px auto 56px;
+  color: var(--mist-soft);
+  font-size: 1.1rem;
+}
+.order-note strong { color: var(--gold-light); font-weight: 600; }
+
+.forms-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 48px;
+  align-items: start;
+}
+.form-panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 40px;
+}
+.form-panel h3 { font-size: 1.25rem; margin-bottom: 6px; }
+.form-panel .form-hint { color: var(--mist-soft); font-size: 1rem; margin-bottom: 24px; }
+
+.field { margin-bottom: 18px; }
+.field label {
+  display: block;
+  font-family: "Cinzel", serif;
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--mist-soft);
+  margin-bottom: 8px;
+}
+.field input, .field select, .field textarea {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  color: var(--cream);
+  padding: 12px 14px;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.05rem;
+}
+.field input:focus, .field select:focus, .field textarea:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+.field textarea { resize: vertical; min-height: 90px; }
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+.wine-picker {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+.wine-picker .pick-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 12px 16px;
+}
+.wine-picker .pick-row .pw-name { font-size: 1.02rem; }
+.wine-picker .pick-row .pw-name small { display: block; color: var(--mist-soft); font-size: 0.85rem; }
+.qty-input { display: flex; align-items: center; gap: 8px; }
+.qty-input button {
+  width: 30px; height: 30px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--cream);
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 1;
+}
+.qty-input button:hover { border-color: var(--gold); color: var(--gold-light); }
+.qty-input input {
+  width: 40px;
+  text-align: center;
+  background: transparent;
+  border: none;
+  color: var(--cream);
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.05rem;
+}
+
+.form-status {
+  margin-top: 16px;
+  font-size: 0.98rem;
+  min-height: 1.4em;
+}
+.form-status.ok { color: #9fcf9f; }
+.form-status.err { color: #e0a29a; }
+
+/* ===========================================================
+   FOOTER
+   =========================================================== */
+#site-footer {
+  background: var(--bg-darker, #100e0b);
+  border-top: 1px solid var(--line);
+  padding: 64px 0 34px;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 48px;
+}
+.footer-col h4 {
+  font-size: 0.85rem;
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+.footer-col p, .footer-col a { color: var(--mist-soft); font-size: 1rem; display: block; margin-bottom: 8px; }
+.footer-col a:hover { color: var(--gold-light); }
+.footer-word {
+  font-family: "Cinzel", serif;
+  font-size: 1.6rem;
+  letter-spacing: 0.28em;
+  margin-bottom: 14px;
+}
+.footer-kashrus {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.footer-kashrus img {
+  height: 64px;
+  width: auto;
+  background: var(--cream);
+  padding: 8px 12px;
+  border-radius: 4px;
+}
+.footer-bottom {
+  border-top: 1px solid var(--line);
+  padding-top: 26px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 0.85rem;
+  color: var(--mist-soft);
+}
+
+/* ===========================================================
+   RESPONSIVE
+   =========================================================== */
+@media (max-width: 900px) {
+  .hero-grid { grid-template-columns: 1fr; text-align: center; }
+  .hero-ctas { justify-content: center; }
+  .hero-bottle-wrap { order: -1; margin-bottom: 20px; }
+  .hero-bottle-wrap img { max-height: 48vh; }
+  .hero-tagline { margin-left: auto; margin-right: auto; }
+
+  .story-grid { grid-template-columns: 1fr; gap: 34px; }
+  .pillars { grid-template-columns: repeat(2, 1fr); }
+
+  .wines-grid { grid-template-columns: 1fr; }
+  .forms-grid { grid-template-columns: 1fr; }
+  .field-row { grid-template-columns: 1fr; }
+
+  .footer-grid { grid-template-columns: 1fr; gap: 30px; }
+
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 160px; }
+  .gallery-grid figure.big { grid-column: span 2; grid-row: span 2; }
+  .gallery-grid figure.wide { grid-column: span 2; }
+}
+
+@media (max-width: 720px) {
+  nav.main-nav {
+    position: fixed;
+    top: 64px; left: 0; right: 0;
+    background: rgba(21,19,15,0.98);
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0 30px;
+    gap: 22px;
+    border-bottom: 1px solid var(--line);
+    transform: translateY(-140%);
+    transition: transform 0.3s ease;
+  }
+  nav.main-nav.open { transform: translateY(0); }
+  .nav-toggle { display: flex; }
+  section { padding: 72px 0; }
+}
