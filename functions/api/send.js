@@ -1,5 +1,5 @@
 // Cloudflare Pages Function
-// Handles POSTs from the Order form and the Contact form on the Olmaya site,
+// Handles POSTs from the Contact form on the Olmaya site,
 // and emails the details to the winery via Resend (https://resend.com).
 //
 // Setup (see README.md for full details):
@@ -19,30 +19,6 @@ function escapeHtml(str = "") {
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;");
-}
-
-function buildOrderEmail(d) {
-  const classic = parseInt(d.qtyClassic, 10) || 0;
-  const noSulfite = parseInt(d.qtyNoSulfite, 10) || 0;
-  const total = classic * 100 + noSulfite * 120;
-
-  const subject = `New order from ${d.name || "website visitor"} (${classic + noSulfite} bottle${classic + noSulfite === 1 ? "" : "s"})`;
-
-  const html = `
-    <h2>New order — Olmaya website</h2>
-    <table cellpadding="6" style="border-collapse:collapse">
-      <tr><td><b>Name</b></td><td>${escapeHtml(d.name)}</td></tr>
-      <tr><td><b>Email</b></td><td>${escapeHtml(d.email)}</td></tr>
-      <tr><td><b>Phone</b></td><td>${escapeHtml(d.phone)}</td></tr>
-      <tr><td><b>Delivery address</b></td><td>${escapeHtml(d.address)}</td></tr>
-      <tr><td><b>Classic</b></td><td>${classic} &times; &#8362;100</td></tr>
-      <tr><td><b>No Added Sulfites</b></td><td>${noSulfite} &times; &#8362;120</td></tr>
-      <tr><td><b>Estimated total</b></td><td>&#8362;${total}</td></tr>
-      <tr><td><b>Notes</b></td><td>${escapeHtml(d.notes || "—")}</td></tr>
-    </table>
-    <p style="color:#888;font-size:12px">Buyer was redirected to the Grow payment link after submitting this form.</p>
-  `;
-  return { subject, html };
 }
 
 function buildContactEmail(d) {
@@ -72,8 +48,7 @@ export async function onRequestPost(context) {
     return new Response(JSON.stringify({ error: "Missing required fields" }), { status: 400 });
   }
 
-  const { subject, html } =
-    data.formType === "order" ? buildOrderEmail(data) : buildContactEmail(data);
+  const { subject, html } = buildContactEmail(data);
 
   if (!env.RESEND_API_KEY) {
     return new Response(

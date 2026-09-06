@@ -151,7 +151,7 @@
           <p class="wine-notes">Dark plum, anise, and graphite, framed by velvety tannins and crisp acidity. Small batch, hand-selected, minimally touched &mdash; the way we like it.</p>
           <div class="wine-meta">
             <div class="wine-price">&#8362;100 <small>/ bottle</small></div>
-            <a href="#order" class="btn">Order</a>
+            <a href="https://pay.grow.link/MTA1NDI2~cf41be5d1d01d5e08da6911477c51833-Mzk1MTU3Mw" class="btn">Order</a>
           </div>
         </div>
       </div>
@@ -161,13 +161,13 @@
           <img src="images/bottle-nosulfite-front.jpg" alt="Olmaya Cabernet Sauvignon 2025 — No Added Sulfites" loading="lazy">
         </div>
         <div class="wine-body">
-          <span class="wine-tag">2025 &middot; No Added Sulfite</span>
+          <span class="wine-tag">2025 &middot; No Added Sulfite &middot; 14.5% Alc./Vol</span>
           <h3>Cabernet Sauvignon</h3>
           <p class="wine-sub">No Added Sulfites</p>
           <p class="wine-notes">The same hand-picked fruit, taken all the way. Nothing added, nothing hiding &mdash; minimal intervention with nothing left out except the intervention itself.</p>
           <div class="wine-meta">
             <div class="wine-price">&#8362;120 <small>/ bottle</small></div>
-            <a href="#order" class="btn">Order</a>
+            <a href="https://pay.grow.link/MTA1NDI2~cf41be5d1d01d5e08da6911477c51833-Mzk1MTU3Mw" class="btn">Order</a>
           </div>
         </div>
       </div>
@@ -182,67 +182,13 @@
       <span class="eyebrow">Order &amp; Get in Touch</span>
       <h2>Bring Home a Bottle</h2>
     </div>
-    <p class="order-note">We currently deliver ourselves across the <strong>greater Beit Shemesh area</strong>. Anywhere else in Israel (or beyond) &mdash; just reach out below and we'll figure it out.</p>
+    <p class="order-note">Order directly from the wine cards above &mdash; secure checkout opens right away. We currently deliver ourselves across the <strong>greater Beit Shemesh area</strong>. Anywhere else in Israel (or beyond) &mdash; just reach out below and we'll figure it out.</p>
 
-    <div class="forms-grid">
-      <div class="form-panel">
-        <h3>Place an Order</h3>
-        <p class="form-hint">Tell us what you'd like and where to send it. We'll follow up to confirm, then take you to secure payment.</p>
-        <form id="order-form" novalidate>
-          <input type="hidden" name="formType" value="order">
-          <div class="field-row">
-            <div class="field">
-              <label for="o-name">Name</label>
-              <input type="text" id="o-name" name="name" required>
-            </div>
-            <div class="field">
-              <label for="o-phone">Phone</label>
-              <input type="tel" id="o-phone" name="phone" required>
-            </div>
-          </div>
-          <div class="field">
-            <label for="o-email">Email</label>
-            <input type="email" id="o-email" name="email" required>
-          </div>
-          <div class="field">
-            <label for="o-address">Delivery Address</label>
-            <input type="text" id="o-address" name="address" placeholder="Street, city" required>
-          </div>
-
-          <div class="wine-picker">
-            <div class="pick-row">
-              <div class="pw-name">Classic<small>&#8362;100 / bottle</small></div>
-              <div class="qty-input">
-                <button type="button" class="qty-dec" data-target="qty-classic" aria-label="Decrease">&minus;</button>
-                <input type="number" id="qty-classic" name="qtyClassic" value="0" min="0" max="99" readonly>
-                <button type="button" class="qty-inc" data-target="qty-classic" aria-label="Increase">+</button>
-              </div>
-            </div>
-            <div class="pick-row">
-              <div class="pw-name">No Added Sulfites<small>&#8362;120 / bottle</small></div>
-              <div class="qty-input">
-                <button type="button" class="qty-dec" data-target="qty-nosulfite" aria-label="Decrease">&minus;</button>
-                <input type="number" id="qty-nosulfite" name="qtyNoSulfite" value="0" min="0" max="99" readonly>
-                <button type="button" class="qty-inc" data-target="qty-nosulfite" aria-label="Increase">+</button>
-              </div>
-            </div>
-          </div>
-
-          <div class="field">
-            <label for="o-notes">Notes (optional)</label>
-            <textarea id="o-notes" name="notes" placeholder="Delivery timing, special requests, etc."></textarea>
-          </div>
-
-          <button type="submit" class="btn btn-solid" id="order-submit">Continue to Payment</button>
-          <div class="form-status" id="order-status"></div>
-        </form>
-      </div>
-
+    <div class="forms-grid forms-grid-single">
       <div class="form-panel" id="contact">
         <h3>Send a Message</h3>
         <p class="form-hint">&ldquo;I read every message myself &mdash; no call center, no auto-reply written by a committee. Just me and the vineyard.&rdquo;</p>
         <form id="contact-form" novalidate>
-          <input type="hidden" name="formType" value="contact">
           <div class="field">
             <label for="c-name">Name</label>
             <input type="text" id="c-name" name="name" required>

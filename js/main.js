@@ -2,13 +2,6 @@
 // OLMAYA WINERY — site scripts
 // ===========================================================
 
-// ---- CONFIG -------------------------------------------------
-// TODO: replace with your real Grow payment link once you have it.
-// The order form sends the buyer's details to you first (via /api/send),
-// then redirects them here to actually pay.
-const GROW_LINK = "https://grow.link/REPLACE_WITH_YOUR_GROW_LINK";
-
-// ---------------------------------------------------------------
 document.getElementById("year").textContent = new Date().getFullYear();
 
 // ---- header shadow on scroll ---------------------------------
@@ -32,17 +25,6 @@ mainNav.querySelectorAll("a").forEach((a) =>
     document.body.style.overflow = "";
   })
 );
-
-// ---- quantity steppers ------------------------------------------
-document.querySelectorAll(".qty-inc, .qty-dec").forEach((btn) => {
-  btn.addEventListener("click", () => {
-    const input = document.getElementById(btn.dataset.target);
-    let val = parseInt(input.value, 10) || 0;
-    val += btn.classList.contains("qty-inc") ? 1 : -1;
-    if (val < 0) val = 0;
-    input.value = val;
-  });
-});
 
 // ---- gallery lightbox --------------------------------------------
 const figures = Array.from(document.querySelectorAll(".gallery-grid figure"));
@@ -118,36 +100,6 @@ async function submitForm(form, statusEl, submitBtn, { onSuccess } = {}) {
     submitBtn.textContent = originalLabel;
   }
 }
-
-// ---- order form -----------------------------------------------------
-const orderForm = document.getElementById("order-form");
-const orderStatus = document.getElementById("order-status");
-const orderSubmit = document.getElementById("order-submit");
-
-orderForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-  const qtyClassic = parseInt(document.getElementById("qty-classic").value, 10) || 0;
-  const qtyNoSulfite = parseInt(document.getElementById("qty-nosulfite").value, 10) || 0;
-
-  if (qtyClassic + qtyNoSulfite === 0) {
-    orderStatus.textContent = "Please select at least one bottle.";
-    orderStatus.className = "form-status err";
-    return;
-  }
-
-  orderStatus.textContent = "Sending your order details…";
-  orderStatus.className = "form-status";
-
-  submitForm(orderForm, orderStatus, orderSubmit, {
-    onSuccess: () => {
-      orderStatus.textContent = "Got it — taking you to payment…";
-      orderStatus.className = "form-status ok";
-      setTimeout(() => {
-        window.location.href = GROW_LINK;
-      }, 900);
-    },
-  });
-});
 
 // ---- contact form ---------------------------------------------------
 const contactForm = document.getElementById("contact-form");
