@@ -92,14 +92,6 @@ section { padding: 96px 0; }
   opacity: 0.7;
 }
 
-/* ---------- gold foil text ---------- */
-.foil {
-  background: linear-gradient(115deg, var(--gold-dark) 10%, var(--gold-light) 35%, var(--gold) 55%, var(--gold-light) 70%, var(--gold-dark) 92%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
 /* ---------- buttons ---------- */
 .btn {
   display: inline-flex;
@@ -151,12 +143,8 @@ section { padding: 96px 0; }
   align-items: center;
   justify-content: space-between;
 }
-.logo-word {
-  font-family: "Cinzel", serif;
-  font-size: 1.5rem;
-  font-weight: 700;
-  letter-spacing: 0.28em;
-}
+.logo-word { display: flex; align-items: center; }
+.logo-img { height: 28px; width: auto; display: block; }
 nav.main-nav {
   display: flex;
   gap: 34px;
@@ -207,13 +195,8 @@ nav.main-nav a:hover { color: var(--gold-light); border-color: var(--gold); }
   gap: 40px;
   align-items: center;
 }
-.hero-word {
-  font-family: "Cinzel", serif;
-  font-size: clamp(2.6rem, 7vw, 5.2rem);
-  letter-spacing: 0.12em;
-  line-height: 1.05;
-  margin-bottom: 22px;
-}
+.hero-word { margin-bottom: 22px; }
+.hero-logo-img { width: clamp(220px, 34vw, 460px); height: auto; display: block; }
 .hero-tagline {
   font-family: "Cormorant Garamond", serif;
   font-style: italic;
@@ -530,12 +513,7 @@ nav.main-nav a:hover { color: var(--gold-light); border-color: var(--gold); }
 }
 .footer-col p, .footer-col a { color: var(--mist-soft); font-size: 1rem; display: block; margin-bottom: 8px; }
 .footer-col a:hover { color: var(--gold-light); }
-.footer-word {
-  font-family: "Cinzel", serif;
-  font-size: 1.6rem;
-  letter-spacing: 0.28em;
-  margin-bottom: 14px;
-}
+.footer-logo-img { height: 32px; width: auto; margin-bottom: 14px; }
 .footer-kashrus {
   display: flex;
   align-items: center;
