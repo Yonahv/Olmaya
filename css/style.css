@@ -161,6 +161,18 @@ nav.main-nav a {
 }
 nav.main-nav a:hover { color: var(--gold-light); border-color: var(--gold); }
 
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.nav-kashrus {
+  height: 30px;
+  width: auto;
+  background: var(--cream);
+  padding: 4px 8px;
+  border-radius: 3px;
+}
 .nav-toggle {
   display: none;
   flex-direction: column;
@@ -561,6 +573,8 @@ nav.main-nav a:hover { color: var(--gold-light); border-color: var(--gold); }
 }
 
 @media (max-width: 720px) {
+  .logo-img { width: 130px; }
+  .nav-kashrus { height: 24px; }
   nav.main-nav {
     position: fixed;
     top: 64px; left: 0; right: 0;
