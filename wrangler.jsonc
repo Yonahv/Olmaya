@@ -9,5 +9,8 @@
   "assets": {
     "directory": ".",
     "binding": "ASSETS"
+  },
+  "vars": {
+    "FROM_EMAIL": "orders@olmayawines.com"
   }
 }
