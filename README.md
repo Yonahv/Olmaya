@@ -1,15 +1,20 @@
 # Olmaya Winery website
 
-A static site (no build step) for Olmaya Winery — ready for GitHub + Cloudflare Pages.
+A static site for Olmaya Winery, deployed as a Cloudflare Worker (static assets + a small
+API route), connected to this GitHub repo — Cloudflare rebuilds and deploys automatically
+on every push to `main`.
 
 ## What's here
 
 ```
-index.html              the whole site (one page, sections linked by nav)
-css/style.css            all styling
-js/main.js                nav, gallery lightbox, contact form logic
-images/                     bottle, label, vineyard photos (already compressed for web)
-functions/api/send.js  Cloudflare Pages Function that emails contact form submissions via Resend
+index.html          the whole site (one page, sections linked by nav)
+css/style.css        all styling
+js/main.js            nav, gallery lightbox, contact form logic
+images/                 bottle, label, vineyard photos (already compressed for web)
+src/worker.js        the Cloudflare Worker: serves the static site, and handles
+                      POSTs to /api/send by emailing them via Resend
+wrangler.jsonc      Worker config (name, the ASSETS binding, which file is the entry point)
+.assetsignore       files excluded from the public static-asset upload (.git, .wrangler)
 ```
 
 Ordering: each wine card's "Order" button links straight to the Grow hosted checkout page (customer picks product/quantity and pays there) — the site itself doesn't collect order details.
@@ -29,24 +34,25 @@ git branch -M main
 git push -u origin main
 ```
 
-## 2. Connect it to Cloudflare Pages
+## 2. How it's deployed
 
-In the Cloudflare dashboard: **Workers & Pages -> Create -> Pages -> Connect to Git**, pick this repo.
-Build settings:
-- **Build command:** leave blank
-- **Build output directory:** `/`
+This project is connected to Cloudflare as a **Worker** (Workers & Pages -> your `olmaya`
+project), not classic Pages — Cloudflare's build log runs `npx wrangler deploy`, which
+reads `wrangler.jsonc` and deploys `src/worker.js` plus everything in this repo as static
+assets (except what's listed in `.assetsignore`). Every push to `main` triggers a redeploy
+automatically; there's nothing to click.
 
-Deploy. Cloudflare will auto-redeploy every time you push to `main`.
-
-Then, in your existing Cloudflare domain, add this Pages project as a custom domain (**Custom domains** tab in the Pages project) so it serves from olmayawines.com (or whichever domain you point at it).
+The site's custom domain (olmayawines.com) is attached to this Worker under
+**Settings -> Domains & Routes** in the Cloudflare dashboard.
 
 ## 3. Turn on the contact form (Resend)
 
-The contact form POSTs to `/api/send`, which is the file at `functions/api/send.js`. It uses your Resend account to email submissions to `yonah@olmayawines.com`.
+The contact form POSTs to `/api/send`, handled inside `src/worker.js`. It uses your Resend
+account to email submissions to `yonah@olmayawines.com`.
 
 1. In Resend, grab an **API key** (Dashboard -> API Keys).
-2. In the Cloudflare Pages project -> **Settings -> Environment variables**, add for the **Production** environment:
-   - `RESEND_API_KEY` = your key (mark it as a secret)
+2. In the Cloudflare dashboard, open the `olmaya` Worker -> **Settings -> Variables and Secrets**, add:
+   - `RESEND_API_KEY` = your key (as a **Secret**, not plain text)
 3. Optional, once you verify `olmayawines.com` as a sending domain in Resend (Resend -> Domains -> Add Domain, then add the DNS records it gives you — easy since your domain is already on Cloudflare):
    - `FROM_EMAIL` = `Olmaya Winery <orders@olmayawines.com>`
    - Until you do this, emails send from Resend's shared test address (`onboarding@resend.dev`), which works fine but looks less polished in your inbox.
@@ -54,7 +60,7 @@ The contact form POSTs to `/api/send`, which is the file at `functions/api/send.
 
 If `RESEND_API_KEY` isn't set yet, the form will show a friendly error with a mailto fallback instead of silently failing.
 
-**Note:** the form only works once the site is actually deployed to Cloudflare Pages (Functions don't run if you just double-click `index.html` locally). To test locally with functions working, you can use `npx wrangler pages dev .` from inside the folder.
+**Note:** the form only works once the site is actually deployed (the Worker doesn't run if you just double-click `index.html` locally). To test locally with the API route working, run `npx wrangler dev` from inside the folder.
 
 ## 4. Changing the Grow payment link
 
@@ -69,5 +75,4 @@ Each wine card's "Order" button in `index.html` (search for `wine-meta`) links d
 
 ## Known placeholders to revisit
 
-- [ ] Resend domain verification for a clean "from" address (`FROM_EMAIL`)
 - [ ] Hebrew version of the site (footer currently just says "coming soon")
