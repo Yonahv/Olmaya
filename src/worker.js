@@ -92,6 +92,12 @@ export default {
       return handleSend(request, env);
     }
 
+    if (url.pathname === "/api/debug-env") {
+      return new Response(JSON.stringify({ envKeys: Object.keys(env) }), {
+        headers: { "Content-Type": "application/json" },
+      });
+    }
+
     return env.ASSETS.fetch(request);
   },
 };
