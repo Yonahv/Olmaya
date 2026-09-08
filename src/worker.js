@@ -1,9 +1,10 @@
-// Cloudflare Pages Function
-// Handles POSTs from the Contact form on the Olmaya site,
-// and emails the details to the winery via Resend (https://resend.com).
+// Cloudflare Worker for the Olmaya site.
+// Serves the static site via the ASSETS binding, and handles POSTs from
+// the Contact form at /api/send by emailing them to the winery via
+// Resend (https://resend.com).
 //
 // Setup (see README.md for full details):
-//   1. In the Cloudflare Pages project settings -> Environment variables,
+//   1. In the Cloudflare dashboard, Worker settings -> Variables and Secrets,
 //      add a secret named RESEND_API_KEY with your Resend API key.
 //   2. Optionally add TO_EMAIL (defaults to yonah@olmayawines.com) and
 //      FROM_EMAIL (defaults to "Olmaya Winery <onboarding@resend.dev>" —
@@ -34,9 +35,7 @@ function buildContactEmail(d) {
   return { subject, html };
 }
 
-export async function onRequestPost(context) {
-  const { request, env } = context;
-
+async function handleSend(request, env) {
   let data;
   try {
     data = await request.json();
@@ -84,3 +83,15 @@ export async function onRequestPost(context) {
     headers: { "Content-Type": "application/json" },
   });
 }
+
+export default {
+  async fetch(request, env) {
+    const url = new URL(request.url);
+
+    if (url.pathname === "/api/send" && request.method === "POST") {
+      return handleSend(request, env);
+    }
+
+    return env.ASSETS.fetch(request);
+  },
+};
