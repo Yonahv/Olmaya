@@ -386,6 +386,10 @@ nav.main-nav a:hover { color: var(--gold-light); border-color: var(--gold); }
   grid-template-columns: repeat(2, 1fr);
   gap: 40px;
 }
+.wines-order-cta {
+  text-align: center;
+  margin-top: 44px;
+}
 .wine-card {
   background: var(--panel);
   border: 1px solid var(--line);

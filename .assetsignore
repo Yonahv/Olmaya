@@ -2,3 +2,6 @@
 .git/**
 .wrangler
 .wrangler/**
+src
+src/**
+wrangler.jsonc
