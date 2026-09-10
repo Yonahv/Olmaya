@@ -302,8 +302,6 @@ nav.main-nav a:hover { color: var(--gold-light); border-color: var(--gold); }
   max-height: 74vh;
   width: auto;
   margin: 0 auto;
-  border-radius: 6px;
-  box-shadow: var(--shadow);
 }
 .scroll-cue {
   position: absolute;
