@@ -112,6 +112,29 @@ section { padding: 96px 0; }
 .thankyou-inner p { max-width: 480px; }
 .thankyou-contact { color: var(--mist-soft); font-size: 1rem; }
 .thankyou-inner .btn { margin-top: 12px; }
+.thankyou-divider {
+  width: 64px;
+  height: 1px;
+  background: var(--gold);
+  opacity: 0.5;
+  margin: 8px auto 30px;
+}
+.thankyou-he {
+  font-family: "Frank Ruhl Libre", Georgia, serif;
+}
+.thankyou-he h2 {
+  font-family: "Frank Ruhl Libre", Georgia, serif;
+  font-size: clamp(1.5rem, 2.8vw, 1.9rem);
+  letter-spacing: normal;
+  color: var(--gold-light);
+  margin: 0 0 10px;
+}
+.thankyou-he .thankyou-lede,
+.thankyou-he .thankyou-contact {
+  font-family: "Frank Ruhl Libre", Georgia, serif;
+  font-style: normal;
+}
+.he-inline { font-family: "Frank Ruhl Libre", Georgia, serif; }
 
 .section-alt { background: var(--bg-alt); }
 
