@@ -82,6 +82,37 @@ h1, h2, h3, h4 {
 
 section { padding: 96px 0; }
 
+/* ---------- thank-you page ---------- */
+#thankyou {
+  min-height: calc(100vh - 76px);
+  display: flex;
+  align-items: center;
+}
+.thankyou-inner {
+  max-width: 640px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.check-badge {
+  color: var(--gold);
+  margin-bottom: 20px;
+}
+.thankyou-inner h1 {
+  font-size: clamp(1.9rem, 3.4vw, 2.6rem);
+}
+.thankyou-lede {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-size: 1.3rem;
+  color: var(--cream);
+  margin: 0 0 18px;
+}
+.thankyou-inner p { max-width: 480px; }
+.thankyou-contact { color: var(--mist-soft); font-size: 1rem; }
+.thankyou-inner .btn { margin-top: 12px; }
+
 .section-alt { background: var(--bg-alt); }
 
 .rule {
@@ -173,6 +204,18 @@ nav.main-nav a:hover { color: var(--gold-light); border-color: var(--gold); }
   padding: 4px 8px;
   border-radius: 3px;
 }
+.lang-toggle {
+  font-family: "Cinzel", serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  padding: 6px 12px;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+.lang-toggle:hover { border-color: var(--gold); }
 .nav-toggle {
   display: none;
   flex-direction: column;
