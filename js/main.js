@@ -9,6 +9,40 @@
 const yearEl = document.getElementById("year");
 if (yearEl) yearEl.textContent = new Date().getFullYear();
 
+// ---- promo banner dismiss (remembered per banner, so a future banner
+// with a different data-banner-id always shows again) ------------------
+// The header is position:fixed, so it needs to be pushed down by the
+// banner's actual rendered height (which varies — e.g. wraps to two
+// lines on narrow screens) rather than a hard-coded offset.
+function syncHeaderOffset() {
+  const headerEl = document.getElementById("site-header");
+  const bannerEl = document.getElementById("promo-banner");
+  if (headerEl) headerEl.style.top = bannerEl ? bannerEl.offsetHeight + "px" : "0px";
+}
+
+const promoBanner = document.getElementById("promo-banner");
+const promoClose = document.getElementById("promo-close");
+if (promoBanner && promoClose) {
+  const bannerId = promoBanner.dataset.bannerId || "";
+  let dismissedId = null;
+  try {
+    dismissedId = localStorage.getItem("promoBannerDismissed");
+  } catch {}
+  if (dismissedId && dismissedId === bannerId) {
+    promoBanner.remove();
+  } else {
+    promoClose.addEventListener("click", () => {
+      promoBanner.remove();
+      syncHeaderOffset();
+      try {
+        localStorage.setItem("promoBannerDismissed", bannerId);
+      } catch {}
+    });
+  }
+}
+syncHeaderOffset();
+window.addEventListener("resize", syncHeaderOffset);
+
 // ---- header shadow on scroll ---------------------------------
 const header = document.getElementById("site-header");
 if (header) {

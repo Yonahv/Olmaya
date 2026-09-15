@@ -173,6 +173,42 @@ section { padding: 96px 0; }
 .btn-solid:hover { background: var(--gold-light); color: #1a1712; }
 .btn:disabled { opacity: 0.55; cursor: not-allowed; transform: none; }
 
+/* ---------- promo banner ---------- */
+.promo-banner {
+  background: var(--gold);
+  color: #1a1712;
+}
+.promo-banner-inner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 46px;
+  text-align: center;
+}
+.promo-banner p {
+  margin: 0;
+  font-family: "Cinzel", serif;
+  font-size: 0.76rem;
+  letter-spacing: 0.03em;
+  line-height: 1.5;
+}
+.promo-close {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #1a1712;
+  font-size: 1.3rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 4px;
+  opacity: 0.7;
+}
+.promo-close:hover { opacity: 1; }
+
 /* ===========================================================
    HEADER / NAV
    =========================================================== */
