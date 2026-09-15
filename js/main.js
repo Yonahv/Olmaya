@@ -11,17 +11,26 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
 
 // ---- promo banner dismiss (remembered per banner, so a future banner
 // with a different data-banner-id always shows again) ------------------
-// The header is position:fixed, so it needs to be pushed down by the
-// banner's actual rendered height (which varies — e.g. wraps to two
-// lines on narrow screens) rather than a hard-coded offset.
-function syncHeaderOffset() {
-  const headerEl = document.getElementById("site-header");
-  const bannerEl = document.getElementById("promo-banner");
-  if (headerEl) headerEl.style.top = bannerEl ? bannerEl.offsetHeight + "px" : "0px";
-}
-
+// The header is position:fixed, so while the banner is present it needs
+// to sit below it — but as the page scrolls past the banner's height,
+// the header should end up flush at top:0 like a normal sticky header,
+// not stay stuck with a leftover gap above it. syncHeaderOffset() runs
+// on every scroll/resize to keep that offset correct continuously.
 const promoBanner = document.getElementById("promo-banner");
 const promoClose = document.getElementById("promo-close");
+const header = document.getElementById("site-header");
+
+function syncHeaderOffset() {
+  if (!header) return;
+  const bannerEl = document.getElementById("promo-banner");
+  if (!bannerEl) {
+    header.style.top = "0px";
+    return;
+  }
+  const offset = Math.max(0, bannerEl.offsetHeight - window.scrollY);
+  header.style.top = offset + "px";
+}
+
 if (promoBanner && promoClose) {
   const bannerId = promoBanner.dataset.bannerId || "";
   let dismissedId = null;
@@ -43,11 +52,11 @@ if (promoBanner && promoClose) {
 syncHeaderOffset();
 window.addEventListener("resize", syncHeaderOffset);
 
-// ---- header shadow on scroll ---------------------------------
-const header = document.getElementById("site-header");
+// ---- header shadow + offset on scroll ---------------------------------
 if (header) {
   const onScroll = () => {
     header.classList.toggle("scrolled", window.scrollY > 8);
+    syncHeaderOffset();
   };
   onScroll();
   window.addEventListener("scroll", onScroll, { passive: true });
