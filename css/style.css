@@ -366,6 +366,7 @@ nav.main-nav a:hover { color: var(--gold-light); border-color: var(--gold); }
 }
 .story-copy p { margin: 0 0 20px; font-size: 1.15rem; color: var(--cream-soft); }
 .story-copy p:last-child { margin-bottom: 0; }
+.story-signature { height: 56px; width: auto; margin-top: 22px; }
 .story-copy .lede {
   font-family: "Cormorant Garamond", serif;
   font-style: italic;
